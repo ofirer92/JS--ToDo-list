@@ -12,17 +12,27 @@ function addTask() {
     li.appendChild(span);
   }
   inputBox.value = "";
+  saveData();
 }
 listContainer.addEventListener(
   "click",
   function (e) {
-    if (e.target.tagName === "li") {
+    if (e.target.tagName === "LI") {
       e.target.classList.toggle("checked");
-      console.log(e.target.classList.toggle("checked"));
+      //   console.log(e.target.classList.toggle("checked"));
       console.log(e.target.classList);
     } else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
     }
+    saveData();
   },
   false
 );
+
+function saveData() {
+  localStorage.setItem("data", listContainer.innerHTML);
+}
+function shoTasks() {
+  listContainer.innerHTML = localStorage.getItem("data");
+}
+shoTasks();
